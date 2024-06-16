@@ -1,5 +1,0 @@
-com\mycompany\apdtsystem\JakartaRestConfiguration.class
-com\controller\FaDocServlet.class
-com\mycompany\apdtsystem\resources\JakartaEE10Resource.class
-com\DAO\FaDocDAO.class
-com\model\FaDoc.class

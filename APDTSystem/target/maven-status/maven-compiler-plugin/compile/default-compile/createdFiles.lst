@@ -1,0 +1,17 @@
+com\mycompany\apdtsystem\JakartaRestConfiguration.class
+com\controller\FaServlet.class
+com\controller\IrvServlet.class
+com\model\Irv.class
+com\DAO\FaDocDAO.class
+com\controller\FaDocServlet.class
+com\DAO\Mqa02DAO.class
+com\DAO\AppDAO.class
+com\model\Mqa02.class
+com\mycompany\apdtsystem\resources\JakartaEE10Resource.class
+com\DAO\IrvDAO.class
+com\model\FaDoc.class
+com\DAO\FaDAO.class
+com\controller\Mqa02Servlet.class
+com\model\App.class
+com\controller\AppServlet.class
+com\model\Fa.class
