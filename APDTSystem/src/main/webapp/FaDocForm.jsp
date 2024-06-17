@@ -117,10 +117,10 @@
                       </td>
                       <td>
                         <select id="docname" name="docname">
-                            <option value="MQA-02 Preparation">MQA-02 Preparation</option>
-                            <option value="MQA-02 Application">MQA-02 Application</option>
-                            <option value="Internal Review Report">Internal Review Report</option>
-                            <option value="Others Document">Others Document</option>
+                            <option value="MQA-02 Preparation" <c:if test="${fadoc.docname == 'MQA-02 Preparation'}">selected</c:if>>MQA-02 Preparation</option>
+                            <option value="MQA-02 Application" <c:if test="${fadoc.docname == 'MQA-02 Application'}">selected</c:if>>MQA-02 Application</option>
+                            <option value="Internal Review Report" <c:if test="${fadoc.docname == 'Internal Review Report'}">selected</c:if>>Internal Review Report</option>
+                            <option value="Others Document" <c:if test="${fadoc.docname == 'Others Document'}">selected</c:if>>Others Document</option>
                         </select>
                       </td>
                   </tr>

@@ -117,11 +117,11 @@
                             <label>Current Status:</label>
                         </td>
                         <td>
-                            <input type="radio" id="status" name="status" value="approved">
+                            <input type="radio" id="status" name="status" value="approved" <c:if test="${mqa02.status == 'approved'}">checked</c:if>>
                             <label for="status"> approved </label>
-                            <input type="radio" id="status" name="status" value="rejected">
+                            <input type="radio" id="status" name="status" value="rejected" <c:if test="${mqa02.status == 'rejected'}">checked</c:if>>
                             <label for="status"> rejected </label>
-                            <input type="radio" id="status" name="status" value="pending">
+                            <input type="radio" id="status" name="status" value="pending" <c:if test="${mqa02.status == 'pending'}">checked</c:if>>
                             <label for="status"> pending </label>
                         </td>
                     </tr>

@@ -132,31 +132,17 @@
                                                             name="irvid" placeholder="e.g.:3">
                       </td>
                   </tr>
-                  <tr>
-                      <td>
-                          <label for="depatment">Department : </label>
-                      </td>
-                      <td>
-                          <select id="department" name="department">
-                              <option id="department" value="FSSM">FSSM</option>
-                              <option id="department" value="FPSM">FPSM</option>
-                              <option id="department" value="FPM">FPM</option>
-                              <option id="department" value="FPEPS">FPEPS</option>
-                              <option id="department" value="FTKK">FTKK</option>
-                              <option id="department" value="FSKM">FSKM</option>
-                          </select>
-                      </td>
-                  </tr>                 
+                                  
                   <tr>
                       <td>
                           <label>Status:</label>
                       </td>
                       <td>
-                            <input type="radio" id="status" name="status" value="approved">
+                            <input type="radio" id="status" name="status" value="approved" <c:if test="${fa.status == 'approved'}">checked</c:if>>
                             <label for="status"> approved </label>
-                            <input type="radio" id="status" name="status" value="rejected">
+                            <input type="radio" id="status" name="status" value="rejected" <c:if test="${fa.status == 'rejected'}">checked</c:if>>
                             <label for="status"> rejected </label>
-                            <input type="radio" id="status" name="status" value="pending">
+                            <input type="radio" id="status" name="status" value="pending" <c:if test="${fa.status == 'pending'}">checked</c:if>>
                             <label for="status"> pending </label>
                         </td>
                   </tr>

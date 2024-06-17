@@ -117,13 +117,13 @@
                           <label for="department">Department : </label>
                       </td>
                       <td>
-                          <select id="department" name="department" value="<c:out value='${app.department}' />">
-                              <option id="department" value="FSSM">FSSM</option>
-                              <option id="department" value="FPSM">FPSM</option>
-                              <option id="department" value="FPM">FPM</option>
-                              <option id="department" value="FPEPS">FPEPS</option>
-                              <option id="department" value="FTKK">FTKK</option>
-                              <option id="department" value="FSKM">FSKM</option>
+                          <select id="department" name="department">
+                              <option id="department" value="FSSM" <c:if test="${app.department == 'FSSM'}">selected</c:if>>FSSM</option>
+                              <option id="department" value="FPSM" <c:if test="${app.department == 'FPSM'}">selected</c:if>>FPSM</option>
+                              <option id="department" value="FPM" <c:if test="${app.department == 'FPM'}">selected</c:if>>FPM</option>
+                              <option id="department" value="FPEPS" <c:if test="${app.department == 'FPEPS'}">selected</c:if>>FPEPS</option>
+                              <option id="department" value="FTKK" <c:if test="${app.department == 'FTKK'}">selected</c:if>>FTKK</option>
+                              <option id="department" value="FSKM" <c:if test="${app.department == 'FSKM'}">selected</c:if>>FSKM</option>
                           </select>
                       </td>
                   </tr>                 

@@ -95,6 +95,15 @@
               <table>
                   <tr>
                       <td>
+                          <label>Program Code:</label>
+                      </td>
+                      <td>
+                          <input type="text" value="<c:out value='${irv.progcode}' />" 
+                                                          name="progcode" required="required" placeholder="e.g.:UG6481001">
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
                           <label>Date:</label>
                       </td>
                       <td>
@@ -108,12 +117,14 @@
                           <label>Status:</label>
                       </td>
                       <td>
-                            <input type="radio" id="status" name="status" value="approved">
-                            <label for="status"> approved </label>
-                            <input type="radio" id="status" name="status" value="rejected">
-                            <label for="status"> rejected </label>
-                            <input type="radio" id="status" name="status" value="pending">
-                            <label for="status"> pending </label>
+                            <input type="radio" id="status" name="status" value="incoming" <c:if test="${irv.status == 'incoming'}">checked</c:if>>
+                            <label for="status"> incoming </label>
+                            <input type="radio" id="status" name="status" value="ongoing" <c:if test="${irv.status == 'ongoing'}">checked</c:if>>
+                            <label for="status"> ongoing </label>
+                            <input type="radio" id="status" name="status" value="postponed" <c:if test="${irv.status == 'postponed'}">checked</c:if>>
+                            <label for="status"> postponed </label>
+                            <input type="radio" id="status" name="status" value="completed" <c:if test="${irv.status == 'completed'}">checked</c:if>>
+                            <label for="status"> completed </label>
                         </td>
                   </tr>
                   <tr>

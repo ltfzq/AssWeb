@@ -10,6 +10,7 @@ package com.model;
  */
 public class Irv {
     private int irvid;
+    private String progcode;
     private String date;
     private String status;
     private int docid;
@@ -18,16 +19,18 @@ public class Irv {
     public Irv() {
     }
 
-    public Irv(String date, String status, int docid, String notes) {
+    public Irv(String progcode, String date, String status, int docid, String notes) {
         super();
+        this.progcode = progcode;
         this.date = date;
         this.status = status;
         this.docid = docid;
         this.notes = notes;
     }
 
-    public Irv(int irvid, String date, String status, int docid, String notes) {
+    public Irv(int irvid, String progcode, String date, String status, int docid, String notes) {
         this.irvid = irvid;
+        this.progcode = progcode;
         this.date = date;
         this.status = status;
         this.docid = docid;
@@ -40,6 +43,14 @@ public class Irv {
 
     public void setIrvid(int irvid) {
         this.irvid = irvid;
+    }
+
+    public String getProgcode() {
+        return progcode;
+    }
+
+    public void setProgcode(String progcode) {
+        this.progcode = progcode;
     }
 
     public String getDate() {
@@ -73,6 +84,8 @@ public class Irv {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    
     
     
 }
