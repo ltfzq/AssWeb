@@ -125,13 +125,15 @@
                       </td>
                   </tr>
                   <tr>
-                      <td>
+                    <td>
                           <label>Document File:</label>
-                      </td>
-                      <td>
-                          <input type="file" value="<c:out value='${fadoc.docfile}' />" 
-                                                           name="docfile" required="required" placeholder="Choose file">
-                      </td>
+                    </td>
+                    <td>
+                          <input type="file" name="docfile" required="required" placeholder="Choose file">
+                          <c:if test="${not empty fadoc.docfile}">
+                              <p>Current file: <c:out value="${fadoc.docfile}" /></p>
+                          </c:if>
+                    </td>
                   </tr>
                   <tr>
                       <td>
