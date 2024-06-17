@@ -108,7 +108,7 @@
                           <label>Document ID:</label>
                       </td>
                       <td>
-                          <input type="docid" value="<c:out value='${mqa02.docid}' />" 
+                          <input type="text" value="<c:out value='${mqa02.docid}' />" 
                                                             name="docid" placeholder="e.g.:1">
                       </td>
                   </tr>

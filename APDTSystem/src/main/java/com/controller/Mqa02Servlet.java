@@ -4,17 +4,29 @@
  */
 package com.controller;
 
+import com.DAO.Mqa02DAO;
+import com.model.FaDoc;
+import com.model.Mqa02;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author Lenovo
  */
+@WebServlet("/")
+@MultipartConfig
 public class Mqa02Servlet extends HttpServlet {
 
     /**
@@ -26,21 +38,11 @@ public class Mqa02Servlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Mqa02Servlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Mqa02Servlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    private Mqa02DAO mqa02DAO;
+    
+    @Override
+    public void init(){
+        mqa02DAO = new Mqa02DAO();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,8 +57,89 @@ public class Mqa02Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getServletPath();
+        
+        try{
+            switch(action){
+                case "/new":
+                    showNewForm(request, response);
+                    break;
+                case "/insert":
+                    insertMqa02(request, response);
+                    break;
+                case "/delete":
+                    deleteMqa02(request, response);
+                    break;
+                case "/edit":
+                    showEditForm(request, response);
+                    break;
+                case "/update":
+                    updateMqa02(request, response);
+                    break;
+                default:
+                    listMqa02(request, response);
+                    break;
+            }
+        }catch(SQLException ex){
+            throw new ServletException(ex);
+        }
     }
+    
+    private void listMqa02(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException{
+        List < Mqa02 > listMqa02 = mqa02DAO.selectAllMqa02();
+        request.setAttribute("listMqa02", listMqa02);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Mqa02List.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Mqa02Form.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException{
+        int mqa02id = Integer.parseInt(request.getParameter("mqa02id"));
+        Mqa02 existingMqa02 = mqa02DAO.selectMqa02(mqa02id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Mqa02Form.jsp");
+        request.setAttribute("mqa02", existingMqa02);
+        dispatcher.forward(request, response);
+    }
+    
+    private void insertMqa02(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException{
+        String progcode = request.getParameter("progcode");
+        int docid = Integer.parseInt(request.getParameter("docid"));
+        String status = request.getParameter("status");
+        String notes = request.getParameter("notes");
+        Mqa02 mqa02 = new Mqa02(progcode, docid, status, notes);
+        mqa02DAO.insertMqa02(mqa02);
+        response.sendRedirect("listMqa02");
+    }
+
+    
+    private void updateMqa02(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+            int mqa02id = request.getIntHeader("mqa02id");
+            String progcode = request.getParameter("progcode");
+            int docid = Integer.parseInt(request.getParameter("docid"));
+            String status = request.getParameter("status");
+            String notes = request.getParameter("notes");
+
+            Mqa02 mqa02 = new Mqa02(mqa02id, progcode, docid, status, notes);
+            mqa02DAO.updateMqa02(mqa02);
+            response.sendRedirect("listMqa02?success=true");
+        }
+    
+    private void deleteMqa02(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException{
+        int mqa02id = Integer.parseInt(request.getParameter("mqa02id"));
+        mqa02DAO.deleteMqa02(mqa02id);
+        response.sendRedirect("listMqa02");
+    }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -69,7 +152,7 @@ public class Mqa02Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /**
