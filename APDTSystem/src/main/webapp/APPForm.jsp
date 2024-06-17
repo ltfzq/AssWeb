@@ -114,10 +114,10 @@
                   </tr>
                   <tr>
                       <td>
-                          <label for="depatment">Department : </label>
+                          <label for="department">Department : </label>
                       </td>
                       <td>
-                          <select id="department" name="department">
+                          <select id="department" name="department" value="<c:out value='${app.department}' />">
                               <option id="department" value="FSSM">FSSM</option>
                               <option id="department" value="FPSM">FPSM</option>
                               <option id="department" value="FPM">FPM</option>

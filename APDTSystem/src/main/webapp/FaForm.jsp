@@ -119,7 +119,7 @@
                       </td>
                       <td>
                           <input type="text" value="<c:out value='${fa.appid}' />" 
-                                                            name="appid" placeholder="e.g.:1">
+                                                            name="appid" placeholder="e.g.:2">
                       </td>
                   </tr>
                   
@@ -129,7 +129,7 @@
                       </td>
                       <td>
                           <input type="irvid" value="<c:out value='${fa.irvid}' />" 
-                                                            name="irvid" placeholder="e.g.:1">
+                                                            name="irvid" placeholder="e.g.:3">
                       </td>
                   </tr>
                   <tr>
