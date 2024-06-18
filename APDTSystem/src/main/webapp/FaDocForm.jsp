@@ -82,12 +82,12 @@
        </center>
       <fieldset style="border-radius: 5px;">
           <c:if test="${fadoc != null}">
-             <form action="update" method="post" enctype="multipart/form-data">
+            <form action="${request.getContextPath()}/fadoc/update" method="post" enctype="multipart/form-data">
           </c:if>
           <c:if test="${fadoc == null}">
-              <form action="insert" method="post" enctype="multipart/form-data">
+            <form action="${request.getContextPath()}/fadoc/insert" method="post" enctype="multipart/form-data">
           </c:if>
-	  
+  
           <h2>
               <c:if test="${fadoc != null}">
                   Edit Document

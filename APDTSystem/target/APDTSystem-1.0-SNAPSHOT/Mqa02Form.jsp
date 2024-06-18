@@ -82,10 +82,10 @@
        </center>
       <fieldset style="border-radius: 5px;">
           <c:if test="${mqa02 != null}">
-             <form action="${request.getContextPath()}/mqa02/insert" method="post">
+             <form action="${pageContext.request.contextPath}/mqa02/update" method="post">
           </c:if>
           <c:if test="${mqa02 == null}">
-              <form action="${request.getContextPath()}/mqa02/update" method="post">
+              <form action="${pageContext.request.contextPath}/mqa02/insert" method="post">
           </c:if>
 	  
           <h2>
