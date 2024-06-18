@@ -108,9 +108,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">View all document📃</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/new">Add new document➕</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">Edit Existing Document✏️</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/fadoc/listfadoc">View all document📃</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/fadoc/new">Add new document➕</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/fadoc/listfadoc">Edit Existing Document✏️</a></td>
           </tr>
         </tbody>
         <thead>
@@ -122,9 +122,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">View all MQA-02📃</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/new">Add new MQA-02➕</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">Edit Existing MQA-02✏️</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/mqa02/listMqa02">View all MQA-02📃</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/mqa02/new2">Add new MQA-02➕</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/mqa02/listMqa02">Edit Existing MQA-02✏️</a></td>
           </tr>
         </tbody>
         <thead>

@@ -20,9 +20,24 @@
         <servlet-name>FaServlet</servlet-name>
         <servlet-class>com.controller.FaServlet</servlet-class>
     </servlet>
+    <!-- Default Servlet Mapping for Static Resources -->
+    <servlet>
+        <servlet-name>default</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>listings</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>FaDocServlet</servlet-name>
-        <url-pattern>/FaDocServlet</url-pattern>
+        <url-pattern>/fadoc/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -42,19 +57,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AppServlet</servlet-name>
-        <url-pattern>/AppServlet</url-pattern>
+        <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Mqa02Servlet</servlet-name>
-        <url-pattern>/Mqa02Servlet</url-pattern>
+        <url-pattern>/mqa02/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>IrvServlet</servlet-name>
-        <url-pattern>/IrvServlet</url-pattern>
+        <url-pattern>/irv/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FaServlet</servlet-name>
-        <url-pattern>/FaServlet</url-pattern>
+        <url-pattern>/fa/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

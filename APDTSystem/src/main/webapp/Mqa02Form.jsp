@@ -11,11 +11,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style1.css">
-  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style1.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>UMT Academic Program Development Tracking System</title>
   
+  
+  <script>
+            window.onload = function() {
+               var urlParams = new URLSearchParams(window.location.search);
+               if (urlParams.has('success')) {
+                 alert('MQA-02 successfully saved');
+               }
+            };
+    </script>
 </head>
 
 <body>
@@ -73,10 +82,10 @@
        </center>
       <fieldset style="border-radius: 5px;">
           <c:if test="${mqa02 != null}">
-             <form action="update" method="post" >
+             <form action="${request.getContextPath()}/mqa02/insert" method="post">
           </c:if>
           <c:if test="${mqa02 == null}">
-              <form action="insert" method="post">
+              <form action="${request.getContextPath()}/mqa02/update" method="post">
           </c:if>
 	  
           <h2>

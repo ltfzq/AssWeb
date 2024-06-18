@@ -5,7 +5,6 @@
 package com.controller;
 
 import com.DAO.Mqa02DAO;
-import com.model.FaDoc;
 import com.model.Mqa02;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -16,8 +15,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,8 +22,7 @@ import java.util.List;
  *
  * @author Lenovo
  */
-@WebServlet("/")
-@MultipartConfig
+@WebServlet(name = "Mqa02Servlet", urlPatterns = {"/mqa02/*"})
 public class Mqa02Servlet extends HttpServlet {
 
     /**
@@ -61,19 +57,19 @@ public class Mqa02Servlet extends HttpServlet {
         
         try{
             switch(action){
-                case "/new":
+                case "/mqa02/new2":
                     showNewForm(request, response);
                     break;
-                case "/insert":
+                case "/mqa02/insert":
                     insertMqa02(request, response);
                     break;
-                case "/delete":
+                case "/mqa02/delete":
                     deleteMqa02(request, response);
                     break;
-                case "/edit":
+                case "/mqa02/edit":
                     showEditForm(request, response);
                     break;
-                case "/update":
+                case "/mqa02/update":
                     updateMqa02(request, response);
                     break;
                 default:
@@ -89,13 +85,13 @@ public class Mqa02Servlet extends HttpServlet {
             throws SQLException, IOException, ServletException{
         List < Mqa02 > listMqa02 = mqa02DAO.selectAllMqa02();
         request.setAttribute("listMqa02", listMqa02);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Mqa02List.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Mqa02List.jsp");
         dispatcher.forward(request, response);
     }
     
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Mqa02Form.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Mqa02Form.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -103,7 +99,7 @@ public class Mqa02Servlet extends HttpServlet {
             throws SQLException, ServletException, IOException{
         int mqa02id = Integer.parseInt(request.getParameter("mqa02id"));
         Mqa02 existingMqa02 = mqa02DAO.selectMqa02(mqa02id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Mqa02Form.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Mqa02Form.jsp");
         request.setAttribute("mqa02", existingMqa02);
         dispatcher.forward(request, response);
     }
@@ -116,13 +112,13 @@ public class Mqa02Servlet extends HttpServlet {
         String notes = request.getParameter("notes");
         Mqa02 mqa02 = new Mqa02(progcode, docid, status, notes);
         mqa02DAO.insertMqa02(mqa02);
-        response.sendRedirect("listMqa02");
+        response.sendRedirect("/mqa02?success=true");
     }
 
     
     private void updateMqa02(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-            int mqa02id = request.getIntHeader("mqa02id");
+            int mqa02id = Integer.parseInt(request.getParameter("mqa02id"));
             String progcode = request.getParameter("progcode");
             int docid = Integer.parseInt(request.getParameter("docid"));
             String status = request.getParameter("status");
@@ -130,14 +126,14 @@ public class Mqa02Servlet extends HttpServlet {
 
             Mqa02 mqa02 = new Mqa02(mqa02id, progcode, docid, status, notes);
             mqa02DAO.updateMqa02(mqa02);
-            response.sendRedirect("listMqa02?success=true");
+            response.sendRedirect("/mqa02?success=true");
         }
     
     private void deleteMqa02(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException{
         int mqa02id = Integer.parseInt(request.getParameter("mqa02id"));
         mqa02DAO.deleteMqa02(mqa02id);
-        response.sendRedirect("listMqa02");
+        response.sendRedirect("/mqa02");
     }
     
 

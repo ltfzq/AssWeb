@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Lenovo
  */
-@WebServlet("/")
+@WebServlet(name = "FaDocServlet", urlPatterns = {"/fadoc/*"})
 @MultipartConfig
 public class FaDocServlet extends HttpServlet {
 
@@ -60,19 +60,19 @@ public class FaDocServlet extends HttpServlet {
         
         try{
             switch(action){
-                case "/new":
+                case "/fadoc/new":
                     showNewForm(request, response);
                     break;
-                case "/insert":
+                case "/fadoc/insert":
                     insertFaDoc(request, response);
                     break;
-                case "/delete":
+                case "/fadoc/delete":
                     deleteFaDoc(request, response);
                     break;
-                case "/edit":
+                case "/fadoc/edit":
                     showEditForm(request, response);
                     break;
-                case "/update":
+                case "/fadoc/update":
                     updateFaDoc(request, response);
                     break;
                 default:
@@ -88,13 +88,13 @@ public class FaDocServlet extends HttpServlet {
             throws SQLException, IOException, ServletException{
         List < FaDoc > listFaDoc = fadocDAO.selectAllFaDoc();
         request.setAttribute("listFaDoc", listFaDoc);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("FaDocList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/FaDocList.jsp");
         dispatcher.forward(request, response);
     }
     
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        RequestDispatcher dispatcher = request.getRequestDispatcher("FaDocForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/FaDocForm.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -102,7 +102,7 @@ public class FaDocServlet extends HttpServlet {
             throws SQLException, ServletException, IOException{
         int docid = Integer.parseInt(request.getParameter("docid"));
         FaDoc existingFaDoc = fadocDAO.selectFaDoc(docid);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("FaDocForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/FaDocForm.jsp");
         request.setAttribute("fadoc", existingFaDoc);
         dispatcher.forward(request, response);
     }
@@ -122,7 +122,7 @@ public class FaDocServlet extends HttpServlet {
         
         FaDoc fadoc = new FaDoc(progcode, docname, fileBytes, date);
         fadocDAO.insertFaDoc(fadoc);
-        response.sendRedirect("FaDocForm.jsp?success=true");
+        response.sendRedirect("/FaDocForm.jsp?success=true");
     } catch (IOException e) {
         throw new ServletException("File upload failed", e);
     } finally {
@@ -155,14 +155,14 @@ public class FaDocServlet extends HttpServlet {
 
             FaDoc fadoc = new FaDoc(docid, progcode, docname, fileBytes, date);
             fadocDAO.updateFaDoc(fadoc);
-            response.sendRedirect("listfadoc?success=true");
+            response.sendRedirect("/listfadoc?success=true");
         }
     
     private void deleteFaDoc(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException{
         int docid = Integer.parseInt(request.getParameter("docid"));
         fadocDAO.deleteFaDoc(docid);
-        response.sendRedirect("listfadoc");
+        response.sendRedirect("/listfadoc");
     }
     
 

@@ -11,8 +11,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style1.css">
-  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style1.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <title>UMT Academic Program Development Tracking System</title>
@@ -77,7 +77,7 @@
                 <hr>
                 <div class="container text-left">
                 <button style="background-color: #00cc00; padding: 10px; border-radius: 3px; border: 0px">
-                    <a href="<%=request.getContextPath()%>/new" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
+                    <a href="<%=request.getContextPath()%>/fadoc/new" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
                         Add Document
                     </a>
                 </button>
@@ -112,8 +112,8 @@
                                 <td>
                                     <c:out value="${fadoc.date}" />
                                 </td>
-                                <td><a href="edit?docid=<c:out value='${fadoc.docid}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="delete?docid=<c:out value='${fadoc.docid}' />">Delete</a>
+                                <td><a href="${pageContext.request.contextPath}/mqa02/edit?docid=<c:out value='${fadoc.docid}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="${pageContext.request.contextPath}/mqa02/delete?docid=<c:out value='${fadoc.docid}' />">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>

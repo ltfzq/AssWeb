@@ -15,7 +15,7 @@ import com.model.Mqa02;
 
 public class Mqa02DAO {
     Connection connection = null;
-    private String jdbcURL = "jdbc:mysql://localhost:3306/carshop";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/apdtsystem";
     private String jdbcUsername = "root";
     private String jdbcPassword = "admin";
     
@@ -43,8 +43,8 @@ public class Mqa02DAO {
         
     public void insertMqa02(Mqa02 mqa02) throws SQLException{
         System.out.println(INSERT_MQA02_SQL);
-        try(Connection connection = getConnection(); PreparedStatement preparedStatement = 
-                connection.prepareStatement(INSERT_MQA02_SQL)){
+        try(Connection connection = getConnection(); 
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_MQA02_SQL)){
             preparedStatement.setString(1, mqa02.getProgcode());
             preparedStatement.setInt(2, mqa02.getDocid());
             preparedStatement.setString(3, mqa02.getStatus());
