@@ -96,7 +96,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="fa" items="${listfa}">
+                        <c:forEach var="fa" items="${listFa}">
                             <tr>
                                 <td>
                                     <c:out value="${fa.faid}" />

@@ -96,7 +96,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="irv" items="${listirv}">
+                        <c:forEach var="irv" items="${listIrv}">
                             <tr>
                                 <td>
                                     <c:out value="${irv.irvid}" />

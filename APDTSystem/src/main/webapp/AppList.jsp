@@ -95,7 +95,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="app" items="${listapp}">
+                        <c:forEach var="app" items="${listApp}">
                             <tr>
                                 <td>
                                     <c:out value="${app.appid}" />
