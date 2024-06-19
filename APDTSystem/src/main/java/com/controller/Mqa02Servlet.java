@@ -108,21 +108,14 @@ public class Mqa02Servlet extends HttpServlet {
 
         Mqa02 mqa02 = new Mqa02(mqa02id, progcode, docid, status, notes);
         mqa02DAO.updateMqa02(mqa02);
-        
-        // Retrieve the updated list and set it as a request attribute
-        List<Mqa02> listMqa02 = mqa02DAO.selectAllMqa02();
-        request.setAttribute("listMqa02", listMqa02);
-
-        // Forward to the list JSP page
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Mqa02List.jsp?success=true");
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/mqa02/listMqa02?success=true");
     }
 
     private void deleteMqa02(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int mqa02id = Integer.parseInt(request.getParameter("mqa02id"));
         mqa02DAO.deleteMqa02(mqa02id);
-        response.sendRedirect(request.getContextPath() + "/mqa02");
+        response.sendRedirect(request.getContextPath() + "/mqa02/listMqa02");
     }
 
     @Override
