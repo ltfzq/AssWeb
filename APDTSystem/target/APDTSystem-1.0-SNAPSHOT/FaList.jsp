@@ -21,7 +21,7 @@
             window.onload = function() {
                var urlParams = new URLSearchParams(window.location.search);
                if (urlParams.has('success')) {
-                 alert('MQA-02 successfully updated');
+                 alert('Full Accreditation successfully updated');
                }
             };
     </script>
@@ -73,12 +73,12 @@
   <div class="content">
      <div class="row">
             <div class="container">
-                <h3 class="container">MQA-02 Application List</h3>
+                <h3 class="container">Full Accreditation Application List</h3>
                 <hr>
                 <div class="container text-left">
                 <button style="background-color: #00cc00; padding: 10px; border-radius: 3px; border: 0px">
-                    <a href="<%=request.getContextPath()%>/mqa02/new2" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
-                        Add MQA-02
+                    <a href="<%=request.getContextPath()%>/fa/new5" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
+                        Add Full Accreditation
                     </a>
                 </button>
                 </div>
@@ -88,32 +88,36 @@
                         <tr>
                             <th>ID</th>
                             <th>Program Code</th>
-                            <th>Document ID</th>
+                            <th>MQA-02 ID</th>
+                            <th>APP ID</th>
+                            <th>Internal Review ID</th>
                             <th>Status</th>
-                            <th>Notes</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="mqa02" items="${listMqa02}">
+                        <c:forEach var="fa" items="${listfa}">
                             <tr>
                                 <td>
-                                    <c:out value="${mqa02.mqa02id}" />
+                                    <c:out value="${fa.faid}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.progcode}" />
+                                    <c:out value="${fa.progcode}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.docid}" />
+                                    <c:out value="${fa.mqa02id}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.status}" />
+                                    <c:out value="${fa.appid}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.notes}" />
+                                    <c:out value="${fa.irvid}" />
                                 </td>
-                                <td><a href="${pageContext.request.contextPath}/mqa02/edit?mqa02id=<c:out value='${mqa02.mqa02id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="${pageContext.request.contextPath}/mqa02/delete?mqa02id=<c:out value='${mqa02.mqa02id}' />">Delete</a>
+                                <td>
+                                    <c:out value="${fa.status}" />
+                                </td>
+                                <td><a href="${pageContext.request.contextPath}/fa/edit?faid=<c:out value='${fa.faid}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="${pageContext.request.contextPath}/fa/delete?faid=<c:out value='${fa.faid}' />">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>

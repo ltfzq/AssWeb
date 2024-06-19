@@ -21,7 +21,7 @@
             window.onload = function() {
                var urlParams = new URLSearchParams(window.location.search);
                if (urlParams.has('success')) {
-                 alert('Document successfully updated');
+                 alert('MQA-02 successfully updated');
                }
             };
     </script>

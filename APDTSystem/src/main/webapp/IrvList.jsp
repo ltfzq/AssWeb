@@ -21,7 +21,7 @@
             window.onload = function() {
                var urlParams = new URLSearchParams(window.location.search);
                if (urlParams.has('success')) {
-                 alert('MQA-02 successfully updated');
+                 alert('Internal Review successfully updated');
                }
             };
     </script>
@@ -73,12 +73,12 @@
   <div class="content">
      <div class="row">
             <div class="container">
-                <h3 class="container">MQA-02 Application List</h3>
+                <h3 class="container">Internal Review List</h3>
                 <hr>
                 <div class="container text-left">
                 <button style="background-color: #00cc00; padding: 10px; border-radius: 3px; border: 0px">
-                    <a href="<%=request.getContextPath()%>/mqa02/new2" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
-                        Add MQA-02
+                    <a href="<%=request.getContextPath()%>/irv/new4" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
+                        Add Internal Review
                     </a>
                 </button>
                 </div>
@@ -88,32 +88,36 @@
                         <tr>
                             <th>ID</th>
                             <th>Program Code</th>
-                            <th>Document ID</th>
+                            <th>Date</th>
                             <th>Status</th>
+                            <th>Document ID</th>
                             <th>Notes</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="mqa02" items="${listMqa02}">
+                        <c:forEach var="irv" items="${listirv}">
                             <tr>
                                 <td>
-                                    <c:out value="${mqa02.mqa02id}" />
+                                    <c:out value="${irv.irvid}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.progcode}" />
+                                    <c:out value="${irv.progcode}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.docid}" />
+                                    <c:out value="${irv.date}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.status}" />
+                                    <c:out value="${irv.status}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.notes}" />
+                                    <c:out value="${irv.docid}" />
                                 </td>
-                                <td><a href="${pageContext.request.contextPath}/mqa02/edit?mqa02id=<c:out value='${mqa02.mqa02id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="${pageContext.request.contextPath}/mqa02/delete?mqa02id=<c:out value='${mqa02.mqa02id}' />">Delete</a>
+                                <td>
+                                    <c:out value="${irv.notes}" />
+                                </td>
+                                <td><a href="${pageContext.request.contextPath}/irv/edit?irvid=<c:out value='${irv.irvid}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="${pageContext.request.contextPath}/irv/delete?irvid=<c:out value='${irv.irvid}' />">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -21,7 +21,7 @@
             window.onload = function() {
                var urlParams = new URLSearchParams(window.location.search);
                if (urlParams.has('success')) {
-                 alert('MQA-02 successfully updated');
+                 alert('APP successfully updated');
                }
             };
     </script>
@@ -73,12 +73,12 @@
   <div class="content">
      <div class="row">
             <div class="container">
-                <h3 class="container">MQA-02 Application List</h3>
+                <h3 class="container">APP List</h3>
                 <hr>
                 <div class="container text-left">
                 <button style="background-color: #00cc00; padding: 10px; border-radius: 3px; border: 0px">
-                    <a href="<%=request.getContextPath()%>/mqa02/new2" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
-                        Add MQA-02
+                    <a href="<%=request.getContextPath()%>/app/new3" style="display: inline-block; width: 100%; height: 100%; text-decoration: none; color: white;">
+                        Add APP
                     </a>
                 </button>
                 </div>
@@ -88,32 +88,32 @@
                         <tr>
                             <th>ID</th>
                             <th>Program Code</th>
-                            <th>Document ID</th>
-                            <th>Status</th>
-                            <th>Notes</th>
+                            <th>APP Name</th>
+                            <th>Department</th>
+                            <th>Position</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="mqa02" items="${listMqa02}">
+                        <c:forEach var="app" items="${listapp}">
                             <tr>
                                 <td>
-                                    <c:out value="${mqa02.mqa02id}" />
+                                    <c:out value="${app.appid}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.progcode}" />
+                                    <c:out value="${app.progcode}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.docid}" />
+                                    <c:out value="${app.appname}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.status}" />
+                                    <c:out value="${app.department}" />
                                 </td>
                                 <td>
-                                    <c:out value="${mqa02.notes}" />
+                                    <c:out value="${app.position}" />
                                 </td>
-                                <td><a href="${pageContext.request.contextPath}/mqa02/edit?mqa02id=<c:out value='${mqa02.mqa02id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="${pageContext.request.contextPath}/mqa02/delete?mqa02id=<c:out value='${mqa02.mqa02id}' />">Delete</a>
+                                <td><a href="${pageContext.request.contextPath}/app/edit?appid=<c:out value='${app.appid}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="${pageContext.request.contextPath}/app/delete?appid=<c:out value='${app.appid}' />">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -1,85 +1,125 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller;
 
+import com.DAO.AppDAO;
+import com.model.App;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Lenovo
- */
+@WebServlet(name = "AppServlet", urlPatterns = {"/app/*"})
 public class AppServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AppServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AppServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    private AppDAO appDAO;
+
+    @Override
+    public void init() {
+        appDAO = new AppDAO();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        handleRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        handleRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    private void handleRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getPathInfo();
+
+        try {
+            switch (action) {
+                case "/new3":
+                    showNewForm(request, response);
+                    break;
+                case "/insert":
+                    insertApp(request, response);
+                    break;
+                case "/delete":
+                    deleteApp(request, response);
+                    break;
+                case "/edit":
+                    showEditForm(request, response);
+                    break;
+                case "/update":
+                    updateApp(request, response);
+                    break;
+                default:
+                    listApp(request, response);
+                    break;
+            }
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
+    }
+
+    private void listApp(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        List<App> listApp = appDAO.selectAllApp();
+        request.setAttribute("listApp", listApp);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/AppList.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/AppForm.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int appid = Integer.parseInt(request.getParameter("appid"));
+        App existingApp = appDAO.selectApp(appid);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/AppForm.jsp");
+        request.setAttribute("app", existingApp);
+        dispatcher.forward(request, response);
+    }
+
+    private void insertApp(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        String progcode = request.getParameter("progcode");
+        String appname = request.getParameter("appname");
+        String department = request.getParameter("department");
+        String position = request.getParameter("position");
+        App app = new App(progcode, appname, department, position);
+        appDAO.insertApp(app);
+        response.sendRedirect(request.getContextPath() + "/AppForm.jsp?success=true");
+    }
+
+    private void updateApp(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int appid = Integer.parseInt(request.getParameter("appid"));
+        String progcode = request.getParameter("progcode");
+        String appname = request.getParameter("appname");
+        String department = request.getParameter("department");
+        String position = request.getParameter("position");
+
+        App app = new App(appid, progcode, appname, department, position);
+        appDAO.updateApp(app);
+        response.sendRedirect(request.getContextPath() + "/app/listApp?success=true");
+    }
+
+    private void deleteApp(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        int appid = Integer.parseInt(request.getParameter("appid"));
+        appDAO.deleteApp(appid);
+        response.sendRedirect(request.getContextPath() + "/appid/listApp");
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

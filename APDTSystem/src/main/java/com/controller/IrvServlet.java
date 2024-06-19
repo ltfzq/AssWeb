@@ -1,85 +1,127 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller;
 
+import com.DAO.IrvDAO;
+import com.model.Irv;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Lenovo
- */
+@WebServlet(name = "IrvServlet", urlPatterns = {"/irv/*"})
 public class IrvServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IrvServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet IrvServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    private IrvDAO irvDAO;
+
+    @Override
+    public void init() {
+        irvDAO = new IrvDAO();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        handleRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        handleRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    private void handleRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getPathInfo();
+
+        try {
+            switch (action) {
+                case "/new4":
+                    showNewForm(request, response);
+                    break;
+                case "/insert":
+                    insertIrv(request, response);
+                    break;
+                case "/delete":
+                    deleteIrv(request, response);
+                    break;
+                case "/edit":
+                    showEditForm(request, response);
+                    break;
+                case "/update":
+                    updateIrv(request, response);
+                    break;
+                default:
+                    listIrv(request, response);
+                    break;
+            }
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
+    }
+
+    private void listIrv(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        List<Irv> listIrv = irvDAO.selectAllIrv();
+        request.setAttribute("listIrv", listIrv);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/IrvList.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/IrvForm.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int irvid = Integer.parseInt(request.getParameter("irvid"));
+        Irv existingIrv = irvDAO.selectIrv(irvid);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/IrvForm.jsp");
+        request.setAttribute("irv", existingIrv);
+        dispatcher.forward(request, response);
+    }
+
+    private void insertIrv(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        String progcode = request.getParameter("progcode");
+        String date = request.getParameter("date");
+        String status = request.getParameter("status");
+        int docid = Integer.parseInt(request.getParameter("docid"));
+        String notes = request.getParameter("notes");
+        Irv irv = new Irv(progcode, date, status, docid, notes);
+        irvDAO.insertIrv(irv);
+        response.sendRedirect(request.getContextPath() + "/IrvForm.jsp?success=true");
+    }
+
+    private void updateIrv(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int irvid = Integer.parseInt(request.getParameter("irvid"));
+        String progcode = request.getParameter("progcode");
+        String date = request.getParameter("date");
+        String status = request.getParameter("status");
+        int docid = Integer.parseInt(request.getParameter("docid"));
+        String notes = request.getParameter("notes");
+
+        Irv irv = new Irv(irvid, progcode, date, status, docid, notes);
+        irvDAO.updateIrv(irv);
+        response.sendRedirect(request.getContextPath() + "/irv/listIrv?success=true");
+    }
+
+    private void deleteIrv(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException {
+        int irvid = Integer.parseInt(request.getParameter("irvid"));
+        irvDAO.deleteIrv(irvid);
+        response.sendRedirect(request.getContextPath() + "/irv/listIrv");
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
