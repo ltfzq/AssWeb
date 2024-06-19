@@ -136,9 +136,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">View all APP🤵</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/new">Add new APP➕</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">Edit Exitsting APP✏️</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/listapp">View all APP🤵</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/new3">Add new APP➕</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/listapp">Edit Exitsting APP✏️</a></td>
           </tr>
         </tbody>
         <thead>
@@ -150,9 +150,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">View all Internal Review📆</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/new">Add new Internal Review➕</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">Edit Existing Internal Review✏️</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/listirv">View all Internal Review📆</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/new4">Add new Internal Review➕</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/listirv">Edit Existing Internal Review✏️</a></td>
           </tr>
         </tbody>
         <thead>
@@ -164,9 +164,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">View all FA Application📃</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/new">Add new FA Application➕</a></td>
-            <td><a href="http://localhost:8080/APDTSystem/listfadoc">Edit Existing FA Application✏️</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/listfa">View all FA Application📃</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/new5">Add new FA Application➕</a></td>
+            <td><a href="http://localhost:8080/APDTSystem/listfa">Edit Existing FA Application✏️</a></td>
           </tr>
         </tbody>
       </table>

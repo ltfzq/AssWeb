@@ -43,36 +43,38 @@ public class FaDocServlet extends HttpServlet {
     public void init(){
         fadocDAO = new FaDocDAO();
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getServletPath();
+        handleRequest(request, response);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        handleRequest(request, response);
+    }
+    
+    protected void handleRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getPathInfo();
         
         try{
             switch(action){
-                case "/fadoc/new":
+                case "/new":
                     showNewForm(request, response);
                     break;
-                case "/fadoc/insert":
+                case "/insert":
                     insertFaDoc(request, response);
                     break;
-                case "/fadoc/delete":
+                case "/delete":
                     deleteFaDoc(request, response);
                     break;
-                case "/fadoc/edit":
+                case "/edit":
                     showEditForm(request, response);
                     break;
-                case "/fadoc/update":
+                case "/update":
                     updateFaDoc(request, response);
                     break;
                 default:
@@ -83,6 +85,7 @@ public class FaDocServlet extends HttpServlet {
             throw new ServletException(ex);
         }
     }
+    
     
     private void listFaDoc(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException{
@@ -122,7 +125,7 @@ public class FaDocServlet extends HttpServlet {
         
         FaDoc fadoc = new FaDoc(progcode, docname, fileBytes, date);
         fadocDAO.insertFaDoc(fadoc);
-        response.sendRedirect("/FaDocForm.jsp?success=true");
+        response.sendRedirect(request.getContextPath() + "/FaDocForm.jsp?success=true");
     } catch (IOException e) {
         throw new ServletException("File upload failed", e);
     } finally {
@@ -155,14 +158,14 @@ public class FaDocServlet extends HttpServlet {
 
             FaDoc fadoc = new FaDoc(docid, progcode, docname, fileBytes, date);
             fadocDAO.updateFaDoc(fadoc);
-            response.sendRedirect("/listfadoc?success=true");
+            response.sendRedirect(request.getContextPath() + "/fadoc/listFaDoc?success=true");
         }
     
     private void deleteFaDoc(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException{
         int docid = Integer.parseInt(request.getParameter("docid"));
         fadocDAO.deleteFaDoc(docid);
-        response.sendRedirect("/listfadoc");
+        response.sendRedirect(request.getContextPath() + "/fadoc/listFaDoc");
     }
     
 
@@ -174,20 +177,10 @@ public class FaDocServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

@@ -43,7 +43,7 @@
   <!-- Navigation bar of the page -->
   <div class="navbar">
     <ul>
-      <li><a href="index.jsp">Home</a></li>
+      <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
       <li><a href="#programlist.html">Program List</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li class="dropdown">
@@ -56,7 +56,7 @@
               <a href="#">JPT</a>
             </div>
           <a href="/task2/task2upgraded.html">Program Offering</a>
-          <a href="index.jsp">Full Accreditation</a>
+          <a href="${pageContext.request.contextPath}/module4.jsp">Full Accreditation</a>
           <a href="module5.html">MQA Certification</a>
         </div>
       </li>
@@ -112,8 +112,8 @@
                                 <td>
                                     <c:out value="${fadoc.date}" />
                                 </td>
-                                <td><a href="${pageContext.request.contextPath}/mqa02/edit?docid=<c:out value='${fadoc.docid}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="${pageContext.request.contextPath}/mqa02/delete?docid=<c:out value='${fadoc.docid}' />">Delete</a>
+                                <td><a href="${pageContext.request.contextPath}/fadoc/edit?docid=<c:out value='${fadoc.docid}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="${pageContext.request.contextPath}/fadoc/delete?docid=<c:out value='${fadoc.docid}' />">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
