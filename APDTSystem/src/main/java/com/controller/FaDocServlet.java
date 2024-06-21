@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -76,6 +77,9 @@ public class FaDocServlet extends HttpServlet {
                     break;
                 case "/update":
                     updateFaDoc(request, response);
+                    break;
+                case "/download":
+                    downloadFaDoc(request, response);
                     break;
                 default:
                     listFaDoc(request, response);
@@ -168,6 +172,24 @@ public class FaDocServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/fadoc/listFaDoc");
     }
     
+    protected void downloadFaDoc(HttpServletRequest request, HttpServletResponse response) 
+            throws SQLException, IOException {
+        int docid = Integer.parseInt(request.getParameter("docid"));
+        FaDoc fadoc = fadocDAO.selectFaDoc(docid);
+
+        if (fadoc != null && fadoc.getDocfile() != null) {
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment;filename=" + fadoc.getDocname());
+            response.setContentLength(fadoc.getDocfile().length);
+
+            try (OutputStream out = response.getOutputStream()) {
+                out.write(fadoc.getDocfile());
+            }
+        } else {
+            response.getWriter().write("File not found for the id: " + docid);
+        }
+    }
+
 
     /**
      * Handles the HTTP <code>POST</code> method.

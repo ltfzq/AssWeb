@@ -1,10 +1,12 @@
 <%-- 
-    Document   : MQA02
-    Created on : Jun 7, 2024, 2:41:20 PM
+    Document   : Mqa02Form
+    Created on : Jun 19, 2024, 11:01:21 PM
     Author     : User
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="com.DAO.FaDocDAO" %>
+<%@ page import="java.util.List" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,8 +109,15 @@
                           <label>Program Code:</label>
                       </td>
                       <td>
-                          <input type="text" value="<c:out value='${mqa02.progcode}' />" 
-                                                          name="progcode" required="required" placeholder="e.g.:UG6481001">
+                          <select id="progcode" name="progcode" required>
+            <% 
+                FaDocDAO fadocdao = new FaDocDAO();
+                List<String> programCodes = fadocdao.selectAllProgramCodes();
+                for (String progcode : programCodes) {
+            %>
+                <option value="<%= progcode %>"><%= progcode %></option>
+            <% } %>
+        </select>
                       </td>
                   </tr>
                   

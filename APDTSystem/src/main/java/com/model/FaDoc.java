@@ -6,7 +6,7 @@ package com.model;
 
 /**
  *
- * @author Lenovo
+ * @author User
  */
 public class FaDoc {
     private int docid;

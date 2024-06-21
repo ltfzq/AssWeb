@@ -1,6 +1,6 @@
 <%-- 
-    Document   : MQA02
-    Created on : Jun 7, 2024, 2:41:20 PM
+    Document   : FaDocList
+    Created on : Jun 19, 2024, 10:56:20 PM
     Author     : User
 --%>
 
@@ -108,6 +108,7 @@
                                 </td>
                                 <td>
                                     <c:out value="${fadoc.docfile}" />
+                                    <a href="${pageContext.request.contextPath}/fadoc/download?docid=${fadoc.docid}">Download</a>
                                 </td>
                                 <td>
                                     <c:out value="${fadoc.date}" />

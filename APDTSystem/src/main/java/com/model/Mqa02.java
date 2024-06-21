@@ -6,7 +6,7 @@ package com.model;
 
 /**
  *
- * @author Lenovo
+ * @author User
  */
 public class Mqa02 {
     private int mqa02id;

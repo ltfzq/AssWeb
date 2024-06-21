@@ -1,9 +1,3 @@
-<%-- 
-    Document   : MQA02
-    Created on : Jun 7, 2024, 2:41:20 PM
-    Author     : User
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>

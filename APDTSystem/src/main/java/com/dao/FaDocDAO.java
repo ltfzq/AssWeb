@@ -131,6 +131,26 @@ public class FaDocDAO {
         return rowUpdated;
     }
     
+    public List<String> selectAllProgramCodes() {
+    List<String> programCodes = new ArrayList<>();
+    String SELECT_ALL_PROGRAM_CODES = "SELECT DISTINCT progcode FROM fadoc";
+
+    try (Connection connection = getConnection();
+         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PROGRAM_CODES)) {
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+            String progcode = rs.getString("progcode");
+            programCodes.add(progcode);
+        }
+    } catch (SQLException e) {
+        printSQLException(e);
+    }
+
+    return programCodes;
+}
+    
     private void printSQLException(SQLException ex){
         for(Throwable e: ex){
             if(e instanceof SQLException){

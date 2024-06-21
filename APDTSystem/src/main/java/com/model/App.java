@@ -6,7 +6,7 @@ package com.model;
 
 /**
  *
- * @author Lenovo
+ * @author User
  */
 public class App {
     private int appid;
@@ -73,6 +73,5 @@ public class App {
     public void setPosition(String position) {
         this.position = position;
     }
-    
     
 }

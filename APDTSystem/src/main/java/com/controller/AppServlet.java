@@ -74,7 +74,7 @@ public class AppServlet extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/AppForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/APPForm.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -82,7 +82,7 @@ public class AppServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int appid = Integer.parseInt(request.getParameter("appid"));
         App existingApp = appDAO.selectApp(appid);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/AppForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/APPForm.jsp");
         request.setAttribute("app", existingApp);
         dispatcher.forward(request, response);
     }
@@ -95,7 +95,7 @@ public class AppServlet extends HttpServlet {
         String position = request.getParameter("position");
         App app = new App(progcode, appname, department, position);
         appDAO.insertApp(app);
-        response.sendRedirect(request.getContextPath() + "/AppForm.jsp?success=true");
+        response.sendRedirect(request.getContextPath() + "/APPForm.jsp?success=true");
     }
 
     private void updateApp(HttpServletRequest request, HttpServletResponse response)
@@ -115,7 +115,7 @@ public class AppServlet extends HttpServlet {
             throws SQLException, IOException {
         int appid = Integer.parseInt(request.getParameter("appid"));
         appDAO.deleteApp(appid);
-        response.sendRedirect(request.getContextPath() + "/appid/listApp");
+        response.sendRedirect(request.getContextPath() + "/app/listApp?success=true");
     }
 
     @Override

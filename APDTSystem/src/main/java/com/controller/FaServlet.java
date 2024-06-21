@@ -96,7 +96,7 @@ public class FaServlet extends HttpServlet {
         String status = request.getParameter("status");
         Fa fa = new Fa(progcode, mqa02id, appid, irvid, status);
         faDAO.insertFa(fa);
-        response.sendRedirect(request.getContextPath() + "/Mqa02Form.jsp?success=true");
+        response.sendRedirect(request.getContextPath() + "/FaForm.jsp?success=true");
     }
 
     private void updateFa(HttpServletRequest request, HttpServletResponse response)

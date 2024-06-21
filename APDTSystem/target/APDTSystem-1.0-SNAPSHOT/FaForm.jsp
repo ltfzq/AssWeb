@@ -1,10 +1,12 @@
 <%-- 
-    Document   : MQA02
-    Created on : Jun 7, 2024, 2:41:20 PM
+    Document   : FaForm
+    Created on : Jun 19, 2024, 10:57:54 PM
     Author     : User
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="com.DAO.FaDocDAO" %>
+<%@ page import="java.util.List" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,8 +109,15 @@
                           <label>Program Code:</label>
                       </td>
                       <td>
-                          <input type="text" value="<c:out value='${fa.progcode}' />" 
-                                                          name="progcode" required="required" placeholder="e.g.:UG6481001">
+                          <select id="progcode" name="progcode" required>
+            <% 
+                FaDocDAO fadocdao = new FaDocDAO();
+                List<String> programCodes = fadocdao.selectAllProgramCodes();
+                for (String progcode : programCodes) {
+            %>
+                <option value="<%= progcode %>"><%= progcode %></option>
+            <% } %>
+        </select>
                       </td>
                   </tr>
                   
