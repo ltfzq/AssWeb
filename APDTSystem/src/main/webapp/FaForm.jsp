@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="com.DAO.FaDocDAO" %>
+<%@ page import="com.DAO.Mqa02DAO" %>
+<%@ page import="com.DAO.AppDAO" %>
+<%@ page import="com.DAO.IrvDAO" %>
 <%@ page import="java.util.List" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -126,9 +129,19 @@
                           <label>MQA-02 ID:</label>
                       </td>
                       <td>
-                          <input type="text" value="<c:out value='${fa.mqa02id}' />" 
-                                                            name="mqa02id" placeholder="e.g.:1">
-                      </td>
+            <select id="mqa02id" name="mqa02id" required>
+              <% 
+                Mqa02DAO mqa02dao = new Mqa02DAO();
+                List<Integer> mqa02Ids = mqa02dao.selectAllMqa02Ids();
+                for (Integer mqa02id : mqa02Ids) {
+              %>
+              <option value="<%= mqa02id %>"
+                      <c:if test="${fa != null && fa.mqa02id == mqa02id}">selected</c:if>>
+                <%= mqa02id %>
+              </option>
+              <% } %>
+            </select>
+          </td>
                   </tr>
                   
                   <tr>
@@ -136,9 +149,19 @@
                           <label>APP ID:</label>
                       </td>
                       <td>
-                          <input type="text" value="<c:out value='${fa.appid}' />" 
-                                                            name="appid" placeholder="e.g.:2">
-                      </td>
+            <select id="appid" name="appid" required>
+              <% 
+                AppDAO appdao = new AppDAO();
+                List<Integer> appIds = appdao.selectAllAppIds();
+                for (Integer appid : appIds) {
+              %>
+              <option value="<%= appid %>"
+                      <c:if test="${fa != null && fa.appid == appid}">selected</c:if>>
+                <%= appid %>
+              </option>
+              <% } %>
+            </select>
+          </td>
                   </tr>
                   
                   <tr>
@@ -146,9 +169,19 @@
                           <label>Internal Review ID:</label>
                       </td>
                       <td>
-                          <input type="irvid" value="<c:out value='${fa.irvid}' />" 
-                                                            name="irvid" placeholder="e.g.:3">
-                      </td>
+            <select id="irvid" name="irvid" required>
+              <% 
+                IrvDAO irvdao = new IrvDAO();
+                List<Integer> irvIds = irvdao.selectAllIrvIds();
+                for (Integer irvid : irvIds) {
+              %>
+              <option value="<%= irvid %>"
+                      <c:if test="${fa != null && fa.irvid == irvid}">selected</c:if>>
+                <%= irvid %>
+              </option>
+              <% } %>
+            </select>
+          </td>
                   </tr>
                                   
                   <tr>

@@ -126,6 +126,23 @@ public class AppDAO {
         return rowUpdated;
     }
     
+    public List<Integer> selectAllAppIds() {
+        List<Integer> appIds = new ArrayList<>();
+        String SELECT_ALL_APP_IDS = "SELECT appid FROM app";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_APP_IDS);) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int appid = rs.getInt("appid");
+                appIds.add(appid);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return appIds;
+    }
+    
     private void printSQLException(SQLException ex){
         for(Throwable e: ex){
             if(e instanceof SQLException){

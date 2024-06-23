@@ -130,6 +130,23 @@ public class IrvDAO {
         return rowUpdated;
     }
     
+    public List<Integer> selectAllIrvIds() {
+        List<Integer> irvIds = new ArrayList<>();
+        String SELECT_ALL_IRV_IDS = "SELECT irvid FROM irv";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_IRV_IDS);) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int irvid = rs.getInt("irvid");
+                irvIds.add(irvid);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return irvIds;
+    }
+    
     private void printSQLException(SQLException ex){
         for(Throwable e: ex){
             if(e instanceof SQLException){

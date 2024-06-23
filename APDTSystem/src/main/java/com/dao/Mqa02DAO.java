@@ -126,6 +126,24 @@ public class Mqa02DAO {
         return rowUpdated;
     }
     
+    public List<Integer> selectAllMqa02Ids() {
+    List<Integer> mqa02Ids = new ArrayList<>();
+    String SELECT_ALL_MQA02_IDS = "SELECT mqa02id FROM mqa02";
+
+    try (Connection connection = getConnection();
+         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_MQA02_IDS);) {
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+            int mqa02id = rs.getInt("mqa02id");
+            mqa02Ids.add(mqa02id);
+        }
+    } catch (SQLException e) {
+        printSQLException(e);
+    }
+    return mqa02Ids;
+}
+    
     private void printSQLException(SQLException ex){
         for(Throwable e: ex){
             if(e instanceof SQLException){
