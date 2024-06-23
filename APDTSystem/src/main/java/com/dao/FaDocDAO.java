@@ -151,6 +151,23 @@ public class FaDocDAO {
     return programCodes;
 }
     
+    public List<Integer> selectAllDocIds() {
+        List<Integer> docIds = new ArrayList<>();
+        String SELECT_ALL_DOC_IDS = "SELECT DISTINCT docid FROM fadoc";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_DOC_IDS);) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int docid = rs.getInt("docid");
+                docIds.add(docid);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return docIds;
+    }
+    
     private void printSQLException(SQLException ex){
         for(Throwable e: ex){
             if(e instanceof SQLException){

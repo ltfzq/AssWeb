@@ -149,10 +149,19 @@
                       <td>
                           <label>Document ID:</label>
                       </td>
-                      <td>
-                          <input type="docid" value="<c:out value='${irv.docid}' />" 
-                                                            name="docid" placeholder="e.g.:1">
-                      </td>
+                       <td>
+            <select id="docid" name="docid" required>
+              <% 
+                List<Integer> docIds = fadocdao.selectAllDocIds();
+                for (Integer docid : docIds) {
+              %>
+              <option value="<%= docid %>"
+                      <c:if test="${fa != null && fa.docid == docid}">selected</c:if>>
+                <%= docid %>
+              </option>
+              <% } %>
+            </select>
+          </td>
                   </tr>
                   <tr>
                         <td>
